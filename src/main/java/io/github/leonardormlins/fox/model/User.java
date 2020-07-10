@@ -24,8 +24,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 
-import io.github.leonardormlins.fox.model.Post.View;
-
 @Entity
 public class User implements UserDetails {
 
@@ -39,7 +37,7 @@ public class User implements UserDetails {
     @NotNull
     private final String name;
     
-    @Column(length = 120, nullable = true)
+    @Column(length = 200, nullable = true)
     private String profilePhoto = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
 
     @NotNull
