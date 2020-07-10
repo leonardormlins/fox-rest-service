@@ -40,7 +40,7 @@ public class User implements UserDetails {
     private final String name;
     
     @Column(length = 120, nullable = true)
-    private String profilePhoto = "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png";
+    private String profilePhoto = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
 
     @NotNull
     private final String password;
@@ -59,7 +59,7 @@ public class User implements UserDetails {
     	inverseJoinColumns = { @JoinColumn(name = "usr_id_followed") })
     private List<User> followed;
 
-    // Hibernate requires the existance of a no-argument constructor.
+    // Hibernate requires a no-argument constructor.
     public User() {
         name = null;
         password = null;

@@ -39,18 +39,18 @@ public class UserController {
         return userService.register(user);
     }
     
-    @PostMapping("follow/{name}")
+    @PostMapping("follow")
     @JsonView(User.Token.View.class)
-    public void follow(@PathVariable("name") final String followed, @RequestBody final User user)
+    public void follow(@RequestBody final User followed)
             throws JsonProcessingException, AuthenticationException {
-        userService.follow(followed, user);
+        userService.follow(followed);
     }
     
-    @PostMapping("updatePhoto/{user}")
+    @PostMapping("updatePhoto")
     @JsonView(User.Token.View.class)
-    public void updatePhoto(@RequestBody final User link, @PathVariable("user") final String user)
+    public void updatePhoto(@RequestBody final User link)
             throws JsonProcessingException, AuthenticationException {
-        userService.updatePhoto(link, user);
+        userService.updatePhoto(link);
     }
     
     @GetMapping("{name}")

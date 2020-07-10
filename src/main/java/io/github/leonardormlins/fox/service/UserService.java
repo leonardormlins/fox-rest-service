@@ -14,14 +14,14 @@ public interface UserService {
 
     User.Token register(final User user) throws JsonProcessingException, AuthenticationException;
     
-    void follow(final String name, final User user) throws JsonProcessingException, AuthenticationException;
+    void follow(final User followed) throws JsonProcessingException, AuthenticationException;
 
     Optional<User> findByName(final String name);
     
-    Iterable<User> findFollowed(final String name);
+    Iterable<User> findFollowed(final String user);
     
     Iterable<User> findAll();
     
-    void updatePhoto(final User link, final String name);
+    void updatePhoto(final User link);
 
 }

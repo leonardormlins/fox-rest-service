@@ -29,7 +29,7 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
 
             try {
                 if (token != null) {
-                    // `substring(7)` skips "Bearer ".
+                    
                     final User user = JwtUtil.parseToken(token.substring(7));
 
                     SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(

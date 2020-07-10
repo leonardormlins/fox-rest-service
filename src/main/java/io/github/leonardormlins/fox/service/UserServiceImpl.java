@@ -1,5 +1,6 @@
 package io.github.leonardormlins.fox.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,10 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-import io.github.leonardormlins.fox.model.Post;
 import io.github.leonardormlins.fox.model.User;
 import io.github.leonardormlins.fox.repository.UserRepository;
 import io.github.leonardormlins.fox.security.JwtUtil;
+import io.github.leonardormlins.fox.security.SecurityUtil;
 
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
@@ -33,7 +34,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public User.Token login(final User user) throws JsonProcessingException, AuthenticationException {
         final Authentication authentication = new UsernamePasswordAuthenticationToken(user.getName(),
                 user.getPassword());
-
+        
         final User authenticatedUser = (User) authenticationManager.authenticate(authentication).getPrincipal();
 
         final String token = JwtUtil.generateToken(authenticatedUser);
@@ -48,10 +49,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
    
     @PreAuthorize("isAuthenticated()")
-    public void follow(final String following, final User user) {
-    	Optional<User> userFollowing = userRepository.findByName(user.getName());
-    	Optional<User> userFollowed = userRepository.findByName(following);
-    	userRepository.follow(userFollowing.get().getId(), userFollowed.get().getId());
+    public void follow(final User followed) {
+    	final User userFollowing = SecurityUtil.getAuthenticatedUser();
+    	
+    	final Optional<User> found = userRepository.findByName(followed.getName());
+    	
+    	final List<User> followingList = userFollowing.getFollowed();
+    	
+    	if(found != null) {
+        	followingList.add(found.get());
+        	userFollowing.setFollowed(followingList);
+    		userRepository.save(userFollowing);
+    	}
     }
     
     @PreAuthorize("isAuthenticated()")
@@ -68,11 +77,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
     
     public Iterable<User> findFollowed(final String name) {
-        return userRepository.findFollowedByName(name);
+        final Optional<User> found = userRepository.findByName(name);
+    	
+    	return found.get().getFollowed();
     }
     
-    public void updatePhoto(final User link, final String name) {
-    	userRepository.updatePhoto(link.getProfilePhoto(), name);
+    public void updatePhoto(final User link) {
+    	final User user = SecurityUtil.getAuthenticatedUser();
+    	
+    	user.setProfilePhoto(link.getProfilePhoto());
+    	
+    	userRepository.save(user);
     }
 
     public UserDetails loadUserByUsername(final String name) throws UsernameNotFoundException {
