@@ -41,10 +41,10 @@ public class Post {
     public Long getId() {
         return id;
     }
-
+    
     @JsonView(View.class)
     public String getPictureLink() {
-        return pictureLink;
+    	return pictureLink;
     }
 
     @JsonView(View.class)
@@ -54,6 +54,17 @@ public class Post {
 
     public void setAuthor(final User author) {
         this.author = author;
+    }
+    
+    //Controller followed case
+    @JsonView(User.ViewPost.class)
+    public String getPictureLinkFollowedCase() {
+        return pictureLink;
+    }
+    
+    @JsonView(User.ViewPost.class)
+    public String getAuthorFollowedCase() {
+    	return author.getName();
     }
 
     public interface View extends User.View {

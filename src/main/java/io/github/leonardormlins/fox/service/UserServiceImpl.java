@@ -3,6 +3,8 @@ package io.github.leonardormlins.fox.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -49,6 +51,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
    
     @PreAuthorize("isAuthenticated()")
+    @Transactional
     public void follow(final User followed) {
     	final User userFollowing = SecurityUtil.getAuthenticatedUser();
     	

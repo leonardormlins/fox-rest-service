@@ -66,7 +66,7 @@ public class UserController {
     }
     
     @GetMapping("followed/{name}")
-    @JsonView(User.View.class)
+    @JsonView(User.ViewPost.class)
     public Iterable<User> findFollowed(@PathVariable("name") final String name) {
         return userService.findFollowed(name);
     }

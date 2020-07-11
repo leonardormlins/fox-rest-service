@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import io.github.leonardormlins.fox.model.Post;
 import io.github.leonardormlins.fox.model.User;
@@ -36,7 +35,6 @@ public class PostServiceImpl implements PostService {
     }
 
     @PreAuthorize("isAuthenticated()")
-    @Transactional
     public Post save(final Post post) {
         final User user = SecurityUtil.getAuthenticatedUser();
 

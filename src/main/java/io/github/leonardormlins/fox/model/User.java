@@ -92,7 +92,7 @@ public class User implements UserDetails {
     public Boolean getAdmin() {
         return admin;
     }
-    
+
     @JsonView(View.class)
     public List<User> getFollowed() {
         return followed;
@@ -111,6 +111,11 @@ public class User implements UserDetails {
     	this.profilePhoto = profilePhoto;
     }
 
+    @JsonView(ViewPost.class)
+    public List<Post> getPosts() {
+    	return posts;
+    }
+    
     @Override
     public List<SimpleGrantedAuthority> getAuthorities() {
         final List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>(2);
@@ -182,6 +187,12 @@ public class User implements UserDetails {
     }
 
     public interface View {
+
+        // Empty.
+
+    }
+    
+    public interface ViewPost {
 
         // Empty.
 
