@@ -8,33 +8,33 @@ A RESTFul API developed in Java using Spring, JPA and JsonWebToken to security (
 
 ### User Controller
 
-#### - Login User
+#### Login User
 
   Returns json data about a single user.
 
-#### - URL
+#### URL
 
   /users/login
 
-#### - Method
+#### Method
 
   `POST`
   
-#### - Data Params  
+#### Data Params  
   
   `{ "name": <USERNAME>, "password": <PASSWORD> }`
 
-#### - Success Response:
+#### Success Response:
 
   Code: 200 <br />
   Content: `{ "name" : <USERNAME>, "admin" : <TRUEORFALSE>, "token": <TOKEN> }`
  
-#### - Error Response:
+#### Error Response:
 
   Code: 403 FORBIDDEN <br />
     Content: `{  }`
 
-#### - Sample call using axios:
+#### Sample call using axios:
 
   ```javascript
     axios.post( baseURL + 'user/login',
