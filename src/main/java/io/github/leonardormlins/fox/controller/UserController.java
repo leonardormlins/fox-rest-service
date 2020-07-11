@@ -64,10 +64,16 @@ public class UserController {
     public Iterable<User> findAll() {
         return userService.findAll();
     }
-    
+
     @GetMapping("followed/{name}")
-    @JsonView(User.ViewPost.class)
+    @JsonView(User.View.class)
     public Iterable<User> findFollowed(@PathVariable("name") final String name) {
+        return userService.findFollowed(name);
+    }
+
+    @GetMapping("followedPosts/{name}")
+    @JsonView(User.ViewPost.class)
+    public Iterable<User> findFollowedPosts(@PathVariable("name") final String name) {
         return userService.findFollowed(name);
     }
 
