@@ -1,5 +1,5 @@
 
-# Java Back-end
+# Java API REST of Fox
 ## Using Spring, JPA, e JWT
 
 A RESTFul API developed in Java using Spring, JPA and JsonWebToken to security (JWT). This API was developed as rest-service to the [Fox Social Network](github.com/leonardormlins/fox) Single-Page-Application.
