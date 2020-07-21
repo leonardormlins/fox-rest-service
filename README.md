@@ -14,7 +14,7 @@ A RESTFul API developed in Java using Spring, JPA and JsonWebToken to security (
 
 #### URL
 
-  /users/login
+  /user/login
 
 #### Method
 
@@ -46,7 +46,7 @@ A RESTFul API developed in Java using Spring, JPA and JsonWebToken to security (
 
 #### URL
 
-  /users/register
+  /user/register
 
 #### Method
 
@@ -71,6 +71,38 @@ A RESTFul API developed in Java using Spring, JPA and JsonWebToken to security (
   ```javascript
     axios.post( baseURL + 'user/register',
     { "name": name, "password": password });
+  ```
+
+### User info
+
+  Returns json data about a single user.
+
+#### URL
+
+  /user/:user
+
+#### Method
+
+  `GET`
+  
+#### Data Params  
+  
+
+
+#### Success Response:
+
+  Code: 200 <br />
+  Content: `{ "name" : <USERNAME>, "admin" : <TRUEORFALSE>, "profilePicture":<LINK> }`
+ 
+#### Error Response:
+
+  Code: 403 FORBIDDEN <br />
+    Content: `{  }`
+
+#### Sample call using axios:
+
+  ```javascript
+    axios.get( baseURL + 'user/register' );
   ```
 
 
